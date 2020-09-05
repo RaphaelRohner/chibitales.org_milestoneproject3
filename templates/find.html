@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% block content %}
+    <!-- GAME CARD STATISTICS SECTION -->
+    <section class="container-fluid">        
+        <div class="row">
+
+            <!-- GAME CARDSTATISTICS LEFT COLUMN -->
+            <div class="col-md-4 col-lg-3 bg-color-theme section-column-left">
+
+                <!-- GAME CARDSTATISTICS LEFT COLUMN HEADING -->
+                <div class="row">
+                    <div class="col-12">                        
+                        <h3 class="section-heading-left uppercase">
+                            Browse Cards
+                        </h3>
+                    </div>
+                </div>
+
+                <!-- GAME CARDSTATISTICS LEFT COLUMN IMAGE -->
+                <div class="row">
+                    <div class="col-12">
+                        <img class="img-fluid" src="../static/images/select_logo.png" alt="Select Logo">
+                    </div>
+                </div>
+
+                <!-- GAME CARDSTATISTICS LEFT COLUMN SEARCH FORM -->                
+                                    
+                <!-- SEARCH BY CARD ID -->
+                <div class="row form-row">
+                    <div class="col col-7 offset-1">
+                        <!-- thanks to nlucaroni @ https://stackoverflow.com/questions/2530/how-do-you-disable-browser-autocomplete-on-web-form-field-input-tag for the autocomplete tip -->
+                        <input type="text" id="cardNumber" class="form-control form-control-sm btn btn-outline-light" placeholder="card number" autocomplete="off" onfocus="clearIDSearch()">                        
+                    </div>
+                    <div class="col col-3">
+                        <button type="button" id="cardNumberSubmit" class="form-control form-control-sm btn btn-outline-light" onclick="findCardByNumber()"><i class="fas fa-search" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+
+                <hr style="margin:3px">
+
+                <!-- SEARCH BY CARD NAME -->
+                <div class="form-row">
+                    <div class="col col-7 offset-1">
+                        <input type="text" list="cards" name="cards" id="cardName" class="form-control form-control-sm btn btn-outline-light" placeholder="card name" onfocus="clearNameSearch()">
+                        <datalist id="cards">
+                        </datalist>
+                    </div>
+                    <div class="col col-3">
+                        <button type="button" id="cardNameSubmit" class="form-control form-control-sm btn btn-outline-light" onclick="findCardByName()"><i class="fas fa-search" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+
+                <hr style="margin:10px">
+
+                <!-- SEARCH BY CARD PROPERTY - TYPE -->
+                <div class="form-row">
+                    <div class="col col-10 offset-1">
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="cardType">Type:</label>
+                            </div>
+                            <select class="custom-select" id="cardType"></select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SEARCH BY CARD PROPERTY - RARITY -->
+                <div class="form-row">
+                    <div class="col col-10 offset-1">
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="cardRarity">Rarity:</label>
+                            </div>
+                            <select class="custom-select" id="cardRarity"></select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SEARCH BY CARD PROPERTY - SOURCE -->                    
+                <div class="form-row">
+                    <div class="col col-10 offset-1">
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="cardSource">Source:</label>
+                            </div>
+                            <select class="custom-select" id="cardSource"></select>
+                        </div>
+                    </div>
+                </div>                    
+
+                <!-- SEARCH BY CARD PROPERTY - SET -->
+                <div class="form-row">
+                    <div class="col col-10 offset-1">
+                        <div class="input-group input-group-sm mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="cardSet">Set:</label>
+                            </div>
+                            <select class="custom-select form-control form-control-sm btn btn-outline-light" id="cardSet"></select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SEARCH BY CARD PROPERTY - SEARCH BUTTON -->
+                <div class="form-row">
+                    <div class="col col-5 offset-6">
+                        <button type="button" id="setSubmit" class="form-control form-control-sm btn btn-outline-light" onclick="findCardsByStats()"><i class="fas fa-search" aria-hidden="true"></i></button>
+                    </div>
+                </div>
+                              
+            </div>
+
+            <!-- GAME CARDSTATISTICS RIGHT COLUMN -->
+            <div class="col-md-8 col-lg-9 bg-color-header section-column-right">
+                <div class="row">
+                    <div class="col">
+                        <h3 id="chibiCardStatus" class="section-heading-right uppercase">Come, find me!</h3>
+                    </div>
+                </div>
+
+                <!-- TO BE REPLACED WITH RETURNED CARD IMAGE AND STATS -->
+                <div id="chibiCardImage" class="row">
+                    <div class="col-10 offset-1 offset-sm-0 col-sm-6">
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="chibi-infos-icon fa fa-question" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-10">
+                                <h4 class="chibi-infos-heading uppercase">How to search</h4>
+                                <p>Use the fields on the left to either:</p>
+                                <ul>                        
+                                    <li>search by card number</li>
+                                    <li>search by card name</li>
+                                    <li>or narrow down with the 4 fields</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>                                        
+                </div>
+            </div>            
+        </div>
+    </section>
+{% endblock %}

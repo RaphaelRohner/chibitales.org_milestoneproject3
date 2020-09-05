@@ -8,12 +8,8 @@
 <body>
     {% extends 'base.html' %}
     {% block content %}
-        {% for dataset in items %}
-            {{dataset.item_name}}
-            {{dataset.item_name}}
-            {{dataset.item_name}}
-            {{dataset.item_name}}
-            {{dataset.item_name}}
+        {% for dataset in loot %}
+            {{dataset.loot_name}}
         {% endfor %}
     {% endblock %}
 </body>
