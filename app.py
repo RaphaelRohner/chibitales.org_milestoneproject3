@@ -23,6 +23,21 @@ def get_find():
     return render_template("find.html")
 
 
+@app.route('/get_play')
+def get_play():
+    return render_template("play.html")
+
+
+@app.route('/get_setup')
+def get_setup():
+    return render_template("setup.html")
+
+
+@app.route('/get_trade')
+def get_trade():
+    return render_template("trade.html")
+
+
 @app.route('/get_items')
 def get_items():
     return render_template("items.html", items=mongo.db.items.find())
