@@ -1,20 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    {% extends 'base.html' %}
-    {% block content %}
-        {% for dataset in items %}
-            {{dataset.item_name}}
-            {{dataset.item_name}}
-            {{dataset.item_name}}
-            {{dataset.item_name}}
-            {{dataset.item_name}}
-        {% endfor %}
-    {% endblock %}
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+    <!-- GAME ITEMS MONGODB SECTION -->
+    <section class="container-fluid">        
+        <div class="row">
+
+            <!-- GAME ITEMS LEFT COLUMN -->
+            <div class="col-md-4 col-lg-3 bg-color-theme section-column-left">
+
+                <!-- GAME ITEMS LEFT COLUMN HEADING -->
+                <div class="row">
+                    <div class="col-12">                        
+                        <h3 class="section-heading-left uppercase">
+                            Manage Names
+                        </h3>
+                    </div>
+                </div>
+
+                <!-- GAME ITEMS LEFT COLUMN IMAGE -->
+                <div class="row">
+                    <div class="col-12">
+                        <img class="img-fluid" src="../static/images/items_logo_s.png" alt="Select Logo">
+                    </div>
+                </div>
+            </div>
+                
+            <!-- GAME CARDSTATISTICS RIGHT COLUMN -->
+            <div class="col-md-8 col-lg-9 bg-color-header section-column-right">
+                <div class="row">
+                    <div class="col">
+                        <h3 id="chibiItemStatus" class="section-heading-right uppercase">Add, edit or delete item names</h3>
+                    </div>
+                    <div class="section-heading-right">
+                        <a class="btn btn-chib" href="{{url_for('get_find')}}" id="navbarDropdownFind" role="button"><i class="fas fa-plus-square" aria-hidden="true"></i><span> Add</span></a>
+                    </div>
+                </div>
+
+                <!-- LIST LOOT COLLECTION ELEMENTS -->                
+                {% for dataset in loot %}                
+                    
+                    <div class="row">                       
+                        <a class="btn btn-chib" href="{{url_for('get_find')}}" role="button"><i class="fas fa-edit" aria-hidden="true"></i><span> Edit</span></a>
+                        <a class="btn btn-chib" href="{{url_for('delete_loot', loot_id=dataset._id)}}" role="button"><i class="fas fa-trash" aria-hidden="true"></i><span> Delete</span></a>                          
+                        <div class="uppercase">
+                            <h5 class="db-results">{{dataset.loot_name}}</h5>
+                        </div>
+                    </div>                                       
+                
+                {% endfor %}
+            </div>            
+        </div>
+    </section>
+{% endblock %}

@@ -45,7 +45,23 @@ def get_items():
 
 @app.route('/get_loot')
 def get_loot():
-    return render_template("loot.html", loot=mongo.db.loot.find())
+    return render_template("loot.html", loot=mongo.db.loot.find())    
+
+
+@app.route('/delete_loot/<loot_id>')
+def delete_loot(loot_id):
+    mongo.db.loot.remove({'_id': ObjectId(loot_id)})
+    return redirect(url_for('get_loot'))
+
+
+@app.route('/get_source')
+def get_source():
+    return render_template("source.html", source=mongo.db.sources.find())
+
+
+@app.route('/get_category')
+def get_category():
+    return render_template("category.html", category=mongo.db.category.find())
 
 
 if __name__ == '__main__':

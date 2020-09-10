@@ -40,11 +40,6 @@
 
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav">
-                                
-                                <!-- Button Find -->
-                                <li class="nav-item active list-inline-item menuitem">
-                                    <a class="btn btn-chib" href="{{url_for('get_find')}}" id="navbarDropdownFind" role="button"><i class="fas fa-search" aria-hidden="true"></i><span> Find</span></a>                                                                       
-                                </li>
 
                                 <!-- Button Game -->
                                 <li class="nav-item active list-inline-item menuitem dropdown">
@@ -94,6 +89,22 @@
                                     <a class="dropdown-item" href="{{url_for('get_trade', _anchor='mint')}}">Mint Chibis</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="{{url_for('get_trade')}}">Trade Main</a>
+                                    </div>
+                                </li>
+
+                                <!-- Button Find -->
+                                <li class="nav-item active list-inline-item menuitem">
+                                    <a class="btn btn-chib" href="{{url_for('get_find')}}" id="navbarDropdownFind" role="button"><i class="fas fa-search" aria-hidden="true"></i><span> Cards</span></a>                                                                       
+                                </li>
+
+                                <!-- Button Items -->
+                                <li class="nav-item list-inline-item menuitem dropdown">
+                                    <a class="btn btn-chib dropdown-toggle" href="{{url_for('get_items')}}" id="navbarDropdownItems" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-database" aria-hidden="true"></i><span> Items</span></a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdownItems">
+                                    <a class="dropdown-item" href="{{url_for('get_items')}}">Items</a>
+                                    <a class="dropdown-item" href="{{url_for('get_loot')}}">Loot</a>
+                                    <a class="dropdown-item" href="{{url_for('get_source')}}">Sources</a>
+                                    <a class="dropdown-item" href="{{url_for('get_category')}}">Categories</a>
                                     </div>
                                 </li>
                             </ul>                    
