@@ -54,7 +54,7 @@ def get_items():
 # OPEN LOOT.HTML - OVERVIEW PAGE
 @app.route('/get_loot')
 def get_loot():
-    return render_template("loot.html", loot=mongo.db.loot.find())
+    return render_template("loot.html", loot=mongo.db.loot.find().sort("loot_name", 1))
 
 
 # OPEN LOOT_ADD.HTML PAGE
@@ -95,9 +95,48 @@ def delete_loot(loot_id):
     return redirect(url_for('get_loot'))
 
 
+# OPEN SOURCE.HTML - OVERVIEW PAGE
 @app.route('/get_source')
 def get_source():
-    return render_template("source.html", source=mongo.db.sources.find())
+    return render_template("source.html", source=mongo.db.sources.find().sort("source_name", 1))
+
+
+# OPEN SOURCE_ADD.HTML PAGE
+@app.route('/add_source')
+def add_source():
+    return render_template('source_add.html')
+
+
+# INSERT NEW SOURCE NAME TO MONGODB AND RETURN TO OVERVIEW
+@app.route('/insert_source', methods=['POST'])
+def insert_source():
+    source_doc = {'source_name': request.form.get('source_name')}
+    mongo.db.sources.insert_one(source_doc)
+    return redirect(url_for('get_source'))
+
+
+# OPEN SOURCE_EDIT.HTML PAGE WITH SELECTED DATASET VALUE TO EDIT
+@app.route('/edit_source/<source_id>')
+def edit_source(source_id):
+    return render_template('source_edit.html',
+                           source=mongo.db.sources.find_one(
+                           {'_id': ObjectId(source_id)}))
+
+
+# UPDATE MONGODB DATASET SOURCE_NAME WITH NEW VALUE AFTER EDIT
+@app.route('/update_source/<source_id>', methods=['POST'])
+def update_source(source_id):
+    mongo.db.sources.update(
+        {'_id': ObjectId(source_id)},
+        {'source_name': request.form.get('source_name')})
+    return redirect(url_for('get_source'))
+
+
+# DELETE A SOURCE NAME FROM MONGODB AND RELOAD SOURCE.HTML
+@app.route('/delete_source/<source_id>')
+def delete_source(source_id):
+    mongo.db.sources.remove({'_id': ObjectId(source_id)})
+    return redirect(url_for('get_source'))
 
 
 @app.route('/get_category')
