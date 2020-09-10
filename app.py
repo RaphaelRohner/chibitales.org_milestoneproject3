@@ -139,9 +139,48 @@ def delete_source(source_id):
     return redirect(url_for('get_source'))
 
 
+# OPEN CATEGORY.HTML - OVERVIEW PAGE
 @app.route('/get_category')
 def get_category():
-    return render_template("category.html", category=mongo.db.category.find())
+    return render_template("category.html", category=mongo.db.category.find().sort("name_category", 1))
+
+
+# OPEN CATEGORY_ADD.HTML PAGE
+@app.route('/add_category')
+def add_category():
+    return render_template('category_add.html')
+
+
+# INSERT NEW CATEGORY NAME TO MONGODB AND RETURN TO OVERVIEW
+@app.route('/insert_category', methods=['POST'])
+def insert_category():
+    category_doc = {'name_category': request.form.get('name_category')}
+    mongo.db.category.insert_one(category_doc)
+    return redirect(url_for('get_category'))
+
+
+# OPEN CATEGORY_EDIT.HTML PAGE WITH SELECTED DATASET VALUE TO EDIT
+@app.route('/edit_category/<category_id>')
+def edit_category(category_id):
+    return render_template('category_edit.html',
+                           category=mongo.db.category.find_one(
+                           {'_id': ObjectId(category_id)}))
+
+
+# UPDATE MONGODB DATASET name_category WITH NEW VALUE AFTER EDIT
+@app.route('/update_category/<category_id>', methods=['POST'])
+def update_category(category_id):
+    mongo.db.category.update(
+        {'_id': ObjectId(category_id)},
+        {'name_category': request.form.get('name_category')})
+    return redirect(url_for('get_category'))
+
+
+# DELETE A CATEGORY NAME FROM MONGODB AND RELOAD CATEGORY.HTML
+@app.route('/delete_category/<category_id>')
+def delete_category(category_id):
+    mongo.db.category.remove({'_id': ObjectId(category_id)})
+    return redirect(url_for('get_category'))
 
 
 if __name__ == '__main__':

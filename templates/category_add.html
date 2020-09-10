@@ -8,28 +8,28 @@
     <link rel="shortcut icon" href="../static/images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="../static/images/favicon.ico" type="image/x-icon">
 
-    <title>Add Loot</title>
+    <title>Add Category</title>
 </head>
 <body>
 {% extends 'base.html'%}
 {% block content %}
-    <!-- LOOT EDITOR ADD NAME MONGODB SECTION -->
+    <!-- CATEGORY EDITOR ADD NAME MONGODB SECTION -->
     <section class="container-fluid">        
         <div class="row">
 
-            <!-- LOOT EDITOR ADD NAME LEFT COLUMN -->
+            <!-- CATEGORY EDITOR ADD NAME LEFT COLUMN -->
             <div class="col-md-4 col-lg-3 bg-color-theme section-column-left">
 
-                <!-- LOOT EDITOR ADD NAME LEFT COLUMN HEADING -->
+                <!-- CATEGORY EDITOR ADD NAME LEFT COLUMN HEADING -->
                 <div class="row">
                     <div class="col-12">                        
                         <h3 class="section-heading-left uppercase">
-                            Manage Names
+                            Manage Categories
                         </h3>
                     </div>
                 </div>
 
-                <!-- LOOT EDITOR ADD NAME LEFT COLUMN IMAGE -->
+                <!-- CATEGORY EDITOR ADD NAME LEFT COLUMN IMAGE -->
                 <div class="row">
                     <div class="col-12">
                         <img class="img-fluid" src="../static/images/items_logo_s.png" alt="Select Logo">
@@ -37,17 +37,17 @@
                 </div>
             </div>
                 
-            <!-- LOOT EDITOR ADD NAME RIGHT COLUMN -->
+            <!-- CATEGORY EDITOR ADD NAME RIGHT COLUMN -->
             <div class="col-md-8 col-lg-9 bg-color-header section-column-right">
                 <div class="row">
                     <div class="col">
-                        <h3 class="section-heading-right uppercase">Add Loot Name</h3>
+                        <h3 class="section-heading-right uppercase">Add Category Name</h3>
                     </div>
                 </div>
-                <form action="{{ url_for('insert_loot') }}" method="POST">
+                <form action="{{ url_for('insert_category') }}" method="POST">
                     <div class="row section-heading-right">
                         <div class="input-field col-9">
-                            <input type="text" id="loot_name" name="loot_name" class="form-control" placeholder="Enter Loot Name Here">
+                            <input type="text" id="name_category" name="name_category" class="form-control" placeholder="Enter Category Name Here">
                         </div>
                         <div>
                             <button class="btn btn-chib" type="submit" name="action">

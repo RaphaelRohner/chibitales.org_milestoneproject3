@@ -1,141 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="../static/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../static/images/favicon.ico" type="image/x-icon">
+
+    <title>Category Names</title>
+</head>
+<body>
 {% extends 'base.html' %}
 {% block content %}
-    <!-- GAME ITEMS MONGODB SECTION -->
+    <!-- CATEGORY NAMES MONGODB SECTION -->
     <section class="container-fluid">        
         <div class="row">
 
-            <!-- GAME ITEMS LEFT COLUMN -->
+            <!-- CATEGORY NAMES LEFT COLUMN -->
             <div class="col-md-4 col-lg-3 bg-color-theme section-column-left">
 
-                <!-- GAME ITEMS LEFT COLUMN HEADING -->
+                <!-- CATEGORY NAMES LEFT COLUMN HEADING -->
                 <div class="row">
                     <div class="col-12">                        
                         <h3 class="section-heading-left uppercase">
-                            FILTER ITEM DB
+                            Manage Categories
                         </h3>
                     </div>
                 </div>
 
-                <!-- GAME ITEMS LEFT COLUMN IMAGE -->
+                <!-- CATEGORY NAMES LEFT COLUMN IMAGE -->
                 <div class="row">
                     <div class="col-12">
                         <img class="img-fluid" src="../static/images/items_logo_s.png" alt="Select Logo">
                     </div>
                 </div>
-
-                <!-- GAME ITEMS LEFT COLUMN FILTERS SECTION -->                
-                                    
-                <!-- FILTER ITEMS -->
-                <div class="row form-row">
-                    <div class="col col-7 offset-1">
-                        <!-- thanks to nlucaroni @ https://stackoverflow.com/questions/2530/how-do-you-disable-browser-autocomplete-on-web-form-field-input-tag for the autocomplete tip -->
-                        <input type="text" id="cardNumber" class="form-control form-control-sm btn btn-outline-light" placeholder="card number" autocomplete="off" onfocus="clearIDSearch()">                        
-                    </div>
-                    <div class="col col-3">
-                        <button type="button" id="cardNumberSubmit" class="form-control form-control-sm btn btn-outline-light" onclick="findCardByNumber()"><i class="fas fa-search" aria-hidden="true"></i></button>
-                    </div>
-                </div>
-
-                <hr style="margin:3px">
-
-                <!-- SEARCH BY CARD NAME -->
-                <div class="form-row">
-                    <div class="col col-7 offset-1">
-                        <input type="text" list="cards" name="cards" id="cardName" class="form-control form-control-sm btn btn-outline-light" placeholder="card name" onfocus="clearNameSearch()">
-                        <datalist id="cards">
-                        </datalist>
-                    </div>
-                    <div class="col col-3">
-                        <button type="button" id="cardNameSubmit" class="form-control form-control-sm btn btn-outline-light" onclick="findCardByName()"><i class="fas fa-search" aria-hidden="true"></i></button>
-                    </div>
-                </div>
-
-                <hr style="margin:10px">
-
-                <!-- SEARCH BY CARD PROPERTY - TYPE -->
-                <div class="form-row">
-                    <div class="col col-10 offset-1">
-                        <div class="input-group input-group-sm mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="cardType">Type:</label>
-                            </div>
-                            <select class="custom-select" id="cardType"></select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SEARCH BY CARD PROPERTY - RARITY -->
-                <div class="form-row">
-                    <div class="col col-10 offset-1">
-                        <div class="input-group input-group-sm mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="cardRarity">Rarity:</label>
-                            </div>
-                            <select class="custom-select" id="cardRarity"></select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SEARCH BY CARD PROPERTY - SOURCE -->                    
-                <div class="form-row">
-                    <div class="col col-10 offset-1">
-                        <div class="input-group input-group-sm mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="cardSource">Source:</label>
-                            </div>
-                            <select class="custom-select" id="cardSource"></select>
-                        </div>
-                    </div>
-                </div>                    
-
-                <!-- SEARCH BY CARD PROPERTY - SET -->
-                <div class="form-row">
-                    <div class="col col-10 offset-1">
-                        <div class="input-group input-group-sm mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="cardSet">Set:</label>
-                            </div>
-                            <select class="custom-select form-control form-control-sm btn btn-outline-light" id="cardSet"></select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SEARCH BY CARD PROPERTY - SEARCH BUTTON -->
-                <div class="form-row">
-                    <div class="col col-5 offset-6">
-                        <button type="button" id="setSubmit" class="form-control form-control-sm btn btn-outline-light" onclick="findCardsByStats()"><i class="fas fa-search" aria-hidden="true"></i></button>
-                    </div>
-                </div>
-                              
             </div>
-
-            <!-- GAME CARDSTATISTICS RIGHT COLUMN -->
+                
+            <!-- CATEGORY NAMES RIGHT COLUMN -->
             <div class="col-md-8 col-lg-9 bg-color-header section-column-right">
                 <div class="row">
                     <div class="col">
-                        <h3 id="chibiItemStatus" class="section-heading-right uppercase">From Dust Till Spawn!</h3>
+                        <h3 id="chibiItemStatus" class="section-heading-right uppercase">Add, edit or delete item category</h3>
+                    </div>
+                    <div class="section-heading-right">
+                        <a class="btn btn-chib" href="{{url_for('add_category')}}" id="navbarDropdownFind" role="button"><i class="fas fa-plus-square" aria-hidden="true"></i><span> Add</span></a>
                     </div>
                 </div>
 
-                <!-- TO BE REPLACED WITH RETURNED CARD IMAGE AND STATS -->
-                <div class="accordion" id="accordionExample">
-                    <div class="card">
-                        <div class="card-header" id="headingOne">
-                        <h2 class="mb-0">
-                            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Collapsible Group Item #1
-                            </button>
-                        </h2>
+                <!-- LIST CATEGORY COLLECTION ELEMENTS -->                
+                {% for dataset in category %}                
+                    
+                    <div class="row">                       
+                        <a class="btn btn-chib" href="{{url_for('edit_category', category_id=dataset._id)}}" role="button"><i class="fas fa-edit" aria-hidden="true"></i><span> Edit</span></a>
+                        <a class="btn btn-chib" href="{{url_for('delete_category', category_id=dataset._id)}}" role="button"><i class="fas fa-trash" aria-hidden="true"></i><span> Delete</span></a>                          
+                        <div class="uppercase">
+                            <h5 class="db-results">{{dataset.name_category}}</h5>
                         </div>
-
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                        <div class="card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-                        </div>
-                        </div>
-                    </div>                                        
-                </div>
+                    </div>                                       
+                
+                {% endfor %}
             </div>            
         </div>
     </section>
 {% endblock %}
+</body>
+</html>
