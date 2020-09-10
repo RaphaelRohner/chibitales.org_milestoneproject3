@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="../static/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../static/images/favicon.ico" type="image/x-icon">
+
+    <title>Add Loot</title>
+</head>
+<body>
+{% extends 'base.html'%}
+{% block content %}
+    <!-- LOOT EDITOR ADD NAME MONGODB SECTION -->
+    <section class="container-fluid">        
+        <div class="row">
+
+            <!-- LOOT EDITOR ADD NAME LEFT COLUMN -->
+            <div class="col-md-4 col-lg-3 bg-color-theme section-column-left">
+
+                <!-- LOOT EDITOR ADD NAME LEFT COLUMN HEADING -->
+                <div class="row">
+                    <div class="col-12">                        
+                        <h3 class="section-heading-left uppercase">
+                            Edit Name
+                        </h3>
+                    </div>
+                </div>
+
+                <!-- LOOT EDITOR ADD NAME LEFT COLUMN IMAGE -->
+                <div class="row">
+                    <div class="col-12">
+                        <img class="img-fluid" src="../static/images/items_logo_s.png" alt="Select Logo">
+                    </div>
+                </div>
+            </div>
+                
+            <!-- LOOT EDITOR ADD NAME RIGHT COLUMN -->
+            <div class="col-md-8 col-lg-9 bg-color-header section-column-right">
+                <div class="row">
+                    <div class="col">
+                        <h3 class="section-heading-right uppercase">Add Loot Name</h3>
+                    </div>
+                </div>
+                <form action="{{ url_for('insert_loot') }}" method="POST">
+                    <div class="row section-heading-right">
+                        <div class="input-field col-9">
+                            <input type="text" id="loot_name" name="loot_name" class="form-control" placeholder="Enter Loot Name Here">
+                        </div>
+                        <div>
+                            <button class="btn btn-chib" type="submit" name="action">
+                                <i class="fas fa-plus-square" aria-hidden="true"></i><span> Add</span>
+                            </button>
+                        </div>
+                    </div>                
+                </form>
+            </div>            
+        </div>
+    </section>
+{% endblock %}
+</body>
+</html>

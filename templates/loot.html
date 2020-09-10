@@ -1,13 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FAVICON -->
+    <link rel="shortcut icon" href="../static/images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="../static/images/favicon.ico" type="image/x-icon">
+
+    <title>Loot Names</title>
+</head>
+<body>
 {% extends 'base.html' %}
 {% block content %}
-    <!-- GAME ITEMS MONGODB SECTION -->
+    <!-- LOOT NAMES MONGODB SECTION -->
     <section class="container-fluid">        
         <div class="row">
 
-            <!-- GAME ITEMS LEFT COLUMN -->
+            <!-- LOOT NAMES LEFT COLUMN -->
             <div class="col-md-4 col-lg-3 bg-color-theme section-column-left">
 
-                <!-- GAME ITEMS LEFT COLUMN HEADING -->
+                <!-- LOOT NAMES LEFT COLUMN HEADING -->
                 <div class="row">
                     <div class="col-12">                        
                         <h3 class="section-heading-left uppercase">
@@ -16,7 +29,7 @@
                     </div>
                 </div>
 
-                <!-- GAME ITEMS LEFT COLUMN IMAGE -->
+                <!-- LOOT NAMES LEFT COLUMN IMAGE -->
                 <div class="row">
                     <div class="col-12">
                         <img class="img-fluid" src="../static/images/items_logo_s.png" alt="Select Logo">
@@ -24,14 +37,14 @@
                 </div>
             </div>
                 
-            <!-- GAME CARDSTATISTICS RIGHT COLUMN -->
+            <!-- LOOT NAMES RIGHT COLUMN -->
             <div class="col-md-8 col-lg-9 bg-color-header section-column-right">
                 <div class="row">
                     <div class="col">
                         <h3 id="chibiItemStatus" class="section-heading-right uppercase">Add, edit or delete item names</h3>
                     </div>
                     <div class="section-heading-right">
-                        <a class="btn btn-chib" href="{{url_for('get_find')}}" id="navbarDropdownFind" role="button"><i class="fas fa-plus-square" aria-hidden="true"></i><span> Add</span></a>
+                        <a class="btn btn-chib" href="{{url_for('add_loot')}}" id="navbarDropdownFind" role="button"><i class="fas fa-plus-square" aria-hidden="true"></i><span> Add</span></a>
                     </div>
                 </div>
 
@@ -51,3 +64,5 @@
         </div>
     </section>
 {% endblock %}
+</body>
+</html>

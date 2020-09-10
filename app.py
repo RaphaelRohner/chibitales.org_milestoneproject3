@@ -48,6 +48,18 @@ def get_loot():
     return render_template("loot.html", loot=mongo.db.loot.find())    
 
 
+@app.route('/add_loot')
+def add_loot():
+    return render_template('loot_add.html')
+
+
+@app.route('/insert_loot', methods=['POST'])
+def insert_loot():
+    loot_doc = {'loot_name': request.form.get('loot_name')}
+    mongo.db.loot.insert_one(loot_doc)
+    return redirect(url_for('get_loot'))
+
+
 @app.route('/delete_loot/<loot_id>')
 def delete_loot(loot_id):
     mongo.db.loot.remove({'_id': ObjectId(loot_id)})
