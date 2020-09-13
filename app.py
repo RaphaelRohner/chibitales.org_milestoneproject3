@@ -48,13 +48,25 @@ def get_trade():
 # OPEN ITEMS.HTML - OVERVIEW PAGE
 @app.route('/get_items')
 def get_items():
-    return render_template("items.html", items=mongo.db.items.find().sort("item_name", 1).sort("item_unit", 1))
+    return render_template("items.html", items=mongo.db.items.find().sort("item_name", 1))
 
 
 # OPEN ITEMS_ADD.HTML PAGE
 @app.route('/add_items')
 def add_items():
-    return render_template('items_add.html')
+    return render_template('items_add.html',
+                           loot=mongo.db.loot.find().sort("loot_name", 1),
+                           category=mongo.db.category.find().sort("name_category", 1),
+                           source=mongo.db.sources.find().sort("source_name", 1))
+
+
+# INSERT NEW ITEM TO MONGODB AND RETURN TO ITEMS OVERVIEW
+@app.route('/insert_item', methods=['POST'])
+def insert_item():
+    item = mongo.db.items
+    item.insert_one(request.form.to_dict())
+    return redirect(url_for('get_items'))
+
 
 # DELETE AN ITEM FROM MONGODB AND RELOAD ITEMS.HTML
 @app.route('/delete_item/<item_id>')
