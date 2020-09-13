@@ -56,6 +56,12 @@ def get_items():
 def add_items():
     return render_template('items_add.html')
 
+# DELETE AN ITEM FROM MONGODB AND RELOAD ITEMS.HTML
+@app.route('/delete_item/<item_id>')
+def delete_item(item_id):
+    mongo.db.items.remove({'_id': ObjectId(item_id)})
+    return redirect(url_for('get_items'))
+
 
 # OPEN LOOT.HTML - OVERVIEW PAGE
 @app.route('/get_loot')
