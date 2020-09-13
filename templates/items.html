@@ -14,14 +14,14 @@
 
 {% extends 'base.html' %}
 {% block content %}
-    <!-- GAME ITEMS MONGODB SECTION -->
+    <!-- ITEMS MONGODB SECTION -->
     <section class="container-fluid">        
         <div class="row">
 
-            <!-- GAME ITEMS LEFT COLUMN -->
+            <!-- ITEMS LEFT COLUMN -->
             <div class="col-md-4 col-lg-3 bg-color-theme section-column-left">
 
-                <!-- GAME ITEMS LEFT COLUMN HEADING -->
+                <!-- ITEMS LEFT COLUMN HEADING -->
                 <div class="row">
                     <div class="col-12">                        
                         <h3 class="section-heading-left uppercase">
@@ -30,14 +30,14 @@
                     </div>
                 </div>
 
-                <!-- GAME ITEMS LEFT COLUMN IMAGE -->
+                <!-- ITEMS LEFT COLUMN IMAGE -->
                 <div class="row">
                     <div class="col-12">
                         <img class="img-fluid" src="../static/images/items_logo_s.png" alt="Select Logo">
                     </div>
                 </div>
 
-                <!-- GAME ITEMS LEFT COLUMN FILTERS SECTION -->                
+                <!-- ITEMS LEFT COLUMN FILTERS SECTION -->                
                                     
                 <!-- FILTER ITEMS -->
                 <div class="row form-row">
@@ -123,32 +123,39 @@
                               
             </div>
 
-            <!-- GAME CARDSTATISTICS RIGHT COLUMN -->
+            <!-- ITEMS RIGHT COLUMN - RESULTS SECTION -->
             <div class="col-md-8 col-lg-9 bg-color-header section-column-right">
                 <div class="row">
                     <div class="col">
                         <h3 id="chibiItemStatus" class="section-heading-right uppercase">From Dust Till Spawn!</h3>
                     </div>
+                    <div class="section-heading-right">
+                        <a class="btn btn-chib" href="{{url_for('add_items')}}" id="navbarDropdownFind" role="button"><i class="fas fa-plus-square" aria-hidden="true"></i><span> Add</span></a>
+                    </div>
                 </div>
 
-                <!-- TO BE REPLACED WITH RETURNED CARD IMAGE AND STATS -->
-                <div class="accordion" id="accordionExample">
+                <!-- ITEM RESULTS ACCORDION -->
+                <div class="accordion" id="itemAccordion">                    
+                    {% for dataset in items %}                        
                     <div class="card">
-                        <div class="card-header" id="headingOne">
-                        <h2 class="mb-0">
-                            <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Collapsible Group Item #1
-                            </button>
-                        </h2>
+                        <div class="card-header" id="heading{{dataset._id}}">
+                            <h4>
+                                <div class="row" data-toggle="collapse" data-target="#col{{dataset._id}}" aria-expanded="true" aria-controls="{{dataset._id}}">
+                                <strong>Name: {{dataset.item_name}}</strong> - Units: {{dataset.item_unit}} - Source: {{dataset.item_source}}
+                                </div>
+                            </h4>
                         </div>
 
-                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
-                        <div class="card-body">
-                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                        <div id="col{{dataset._id}}" class="collapse show" aria-labelledby="heading{{dataset._id}}" data-parent="#itemAccordion">
+                            <div class="card-body">
+                                <p>Category: {{dataset.item_category}}</p>
+                                <p>Dropchance: {{dataset.item_chance}}</p>
+                                <p>Availability: {{dataset.item_time}}</p>
+                            </div>
                         </div>
-                        </div>
-                    </div>                                        
-                </div>
+                    </div>                   
+                    {% endfor %}                   
+                </div>                
             </div>            
         </div>
     </section>

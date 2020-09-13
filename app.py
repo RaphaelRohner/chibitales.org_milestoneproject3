@@ -45,10 +45,16 @@ def get_trade():
     return render_template("trade.html")
 
 
-# ROUTE FOR ITEMS OVERVIEW
+# OPEN ITEMS.HTML - OVERVIEW PAGE
 @app.route('/get_items')
 def get_items():
-    return render_template("items.html", items=mongo.db.items.find())
+    return render_template("items.html", items=mongo.db.items.find().sort("item_name", 1).sort("item_unit", 1))
+
+
+# OPEN ITEMS_ADD.HTML PAGE
+@app.route('/add_items')
+def add_items():
+    return render_template('items_add.html')
 
 
 # OPEN LOOT.HTML - OVERVIEW PAGE
