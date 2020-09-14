@@ -83,18 +83,20 @@ def edit_item(item_id):
 
 
 # UPDATE MONGODB COLLECTION ITEMS WITH NEW VALUES AFTER EDIT
-@app.route('/update_task/<task_id>', methods=["POST"])
-def update_task(task_id):
-    tasks = mongo.db.tasks
-    tasks.update({'_id': ObjectId(task_id)},
+@app.route('/update_item/<item_id>', methods=["POST"])
+def update_item(item_id):
+    items = mongo.db.items
+    items.update({'_id': ObjectId(item_id)},
         {
-        'task_name': request.form.get('task_name'),
-        'category_name': request.form.get('category_name'),
-        'task_description': request.form.get('task_description'),
-        'due_date': request.form.get('due_date'),
-        'is_urgent': request.form.get('is_urgent')
+        'item_name': request.form.get('item_name'),
+        'item_category': request.form.get('item_category'),
+        'item_source': request.form.get('item_source'),
+        'item_chance': request.form.get('item_chance'),
+        'item_unit': request.form.get('item_unit'),
+        'item_price': request.form.get('item_price'),
+        'item_time': request.form.get('item_time'),
         })
-    return redirect(url_for('get_tasks'))
+    return redirect(url_for('get_items'))
 
 
 # DELETE AN ITEM FROM MONGODB AND RELOAD ITEMS.HTML

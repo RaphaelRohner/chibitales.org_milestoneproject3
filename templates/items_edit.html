@@ -44,7 +44,7 @@
                         <h3 class="section-heading-right uppercase">Edit Item</h3>
                     </div>
                 </div>
-                <form action="{{ url_for('insert_item') }}" method="POST">
+                <form action="{{ url_for('update_item', item_id=item._id) }}" method="POST">
                     <div class="row section-heading-right">                        
                         <div class="form-group col-6">
                             <label>Item Name</label>
@@ -101,11 +101,16 @@
                             <label>Available at Day</label>
                             <input type="text" class="form-control" id="item_time" name="item_time" value="{{item.item_time}}">
                         </div>                       
-                    </div>                   
-                    <div class="row section-heading-right">
-                        <button class="btn btn-chib" type="submit" name="action">
-                            <i class="fas fa-plus-square" aria-hidden="true"></i><span> Add</span>
-                        </button>
+                    </div>
+                    <div class="row section-heading-right">                  
+                        <div>
+                            <button class="btn btn-chib" type="submit" name="action">
+                                <i class="fas fa-save" aria-hidden="true"></i><span> Save</span>
+                            </button>
+                        </div>
+                        <div>
+                            <a class="btn btn-chib" href="{{url_for('get_items')}}" role="button"><i class="fas fa-window-close" aria-hidden="true"></i><span> Cancel</span></a>                            
+                        </div>
                     </div>
                 </form>           
             </div>
