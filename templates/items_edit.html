@@ -41,46 +41,65 @@
             <div class="col-md-8 col-lg-9 bg-color-header section-column-right">
                 <div class="row">
                     <div class="col">
-                        <h3 class="section-heading-right uppercase">Add Item</h3>
+                        <h3 class="section-heading-right uppercase">Edit Item</h3>
                     </div>
                 </div>
                 <form action="{{ url_for('insert_item') }}" method="POST">
                     <div class="row section-heading-right">                        
                         <div class="form-group col-6">
-                            <select id="item_name" class="form-control" name="item_name">
+                            <label>Item Name</label>
+                            <select id="item_name" name="item_name" class="form-control">
                                 <option value="" disabled selected>Select Item Name</option>
-                                {% for dataset in loot %}
-                                    <option value="{{dataset.loot_name}}">{{dataset.loot_name}}</option>                                
+                                {% for dataset in names %}
+                                    {% if dataset.loot_name == item.item_name %}
+                                        <option value="{{dataset.loot_name}}" selected >{{dataset.loot_name}}</option>
+                                    {% else %}
+                                        <option value="{{dataset.loot_name}}">{{dataset.loot_name}}</option>
+                                    {% endif %}
                                 {% endfor %}
                             </select>
-                        </div>
+                        </div>                        
                         <div class="form-group col-6">
-                            <select id="item_category" class="form-control" name="item_category">
-                                <option value="" disabled selected>Select Item Category</option>
-                                {% for categories in category %}
-                                    <option value="{{categories.name_category}}">{{categories.name_category}}</option>                                
-                                {% endfor %}
-                            </select>
-                        </div>
-                        <div class="form-group col-6">
-                            <select id="item_source" class="form-control" name="item_source">
+                            <label>Item Source</label>
+                            <select id="item_source" name="item_source" class="form-control">
                                 <option value="" disabled selected>Select Item Source</option>
-                                {% for sources in source %}
-                                    <option value="{{sources.source_name}}">{{sources.source_name}}</option>                                
+                                {% for sourc in sources %}
+                                    {% if sourc.source_name == item.item_source %}
+                                        <option value="{{sourc.source_name}}" selected >{{sourc.source_name}}</option>
+                                    {% else %}
+                                        <option value="{{sourc.source_name}}">{{sourc.source_name}}</option>
+                                    {% endif %}
                                 {% endfor %}
                             </select>
                         </div>
                         <div class="form-group col-6">
-                            <input type="text" class="form-control" id="item_chance" name="item_chance" placeholder="Enter Dropchance">
+                            <label>Item Category</label>
+                            <select id="item_category" name="item_category" class="form-control">
+                                <option value="" disabled selected>Select Item Category</option>
+                                {% for cats in categories %}
+                                    {% if cats.name_category == item.item_category %}
+                                        <option value="{{cats.name_category}}" selected >{{cats.name_category}}</option>
+                                    {% else %}
+                                        <option value="{{cats.name_category}}">{{cats.name_category}}</option>
+                                    {% endif %}
+                                {% endfor %}
+                            </select>
                         </div>
                         <div class="form-group col-6">
-                            <input type="text" class="form-control" id="item_unit" name="item_unit" placeholder="Enter Item Amount">
+                            <label>Dropchance %</label>
+                            <input type="text" class="form-control" id="item_chance" name="item_chance" value="{{item.item_chance}}">                            
                         </div>
                         <div class="form-group col-6">
-                            <input type="text" class="form-control" id="item_price" name="item_price" placeholder="Enter Item Price">
+                            <label>Amount</label>
+                            <input type="text" class="form-control" id="item_unit" name="item_unit" value="{{item.item_unit}}">
                         </div>
                         <div class="form-group col-6">
-                            <input type="text" class="form-control" id="item_time" name="item_time" placeholder="Enter Cycle Day (1-7 or all days)">
+                            <label>Price + Units</label>
+                            <input type="text" class="form-control" id="item_price" name="item_price" value="{{item.item_price}}">
+                        </div>
+                        <div class="form-group col-6">
+                            <label>Available at Day</label>
+                            <input type="text" class="form-control" id="item_time" name="item_time" value="{{item.item_time}}">
                         </div>                       
                     </div>                   
                     <div class="row section-heading-right">

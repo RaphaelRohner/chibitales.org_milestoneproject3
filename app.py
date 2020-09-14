@@ -48,7 +48,7 @@ def get_trade():
 # OPEN ITEMS.HTML - OVERVIEW PAGE
 @app.route('/get_items')
 def get_items():
-    return render_template("items.html", items=mongo.db.items.find().sort("item_name", 1))
+    return render_template("items.html", items=mongo.db.items.find().sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]))
 
 
 # OPEN ITEMS_ADD.HTML PAGE
@@ -66,6 +66,35 @@ def insert_item():
     item = mongo.db.items
     item.insert_one(request.form.to_dict())
     return redirect(url_for('get_items'))
+
+
+# OPEN ITEMS_EDIT.HTML PAGE WITH SELECTED DATASET VALUE TO EDIT
+@app.route('/edit_item/<item_id>')
+def edit_item(item_id):
+    the_item = mongo.db.items.find_one({"_id": ObjectId(item_id)})
+    all_names = mongo.db.loot.find().sort("loot_name", 1)
+    all_sources = mongo.db.sources.find().sort("source_name", 1)
+    all_categories = mongo.db.category.find().sort("name_category", 1)
+    return render_template('items_edit.html', 
+                            item=the_item,
+                            names=all_names,
+                            sources=all_sources,
+                            categories=all_categories,)
+
+
+# UPDATE MONGODB COLLECTION ITEMS WITH NEW VALUES AFTER EDIT
+@app.route('/update_task/<task_id>', methods=["POST"])
+def update_task(task_id):
+    tasks = mongo.db.tasks
+    tasks.update({'_id': ObjectId(task_id)},
+        {
+        'task_name': request.form.get('task_name'),
+        'category_name': request.form.get('category_name'),
+        'task_description': request.form.get('task_description'),
+        'due_date': request.form.get('due_date'),
+        'is_urgent': request.form.get('is_urgent')
+        })
+    return redirect(url_for('get_tasks'))
 
 
 # DELETE AN ITEM FROM MONGODB AND RELOAD ITEMS.HTML
