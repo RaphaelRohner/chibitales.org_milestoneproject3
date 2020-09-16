@@ -40,87 +40,47 @@
                 <!-- ITEMS LEFT COLUMN FILTERS SECTION -->                
                                     
                 <!-- FILTER ITEMS -->
-                <div class="row form-row">
-                    <div class="col col-7 offset-1">
-                        <!-- thanks to nlucaroni @ https://stackoverflow.com/questions/2530/how-do-you-disable-browser-autocomplete-on-web-form-field-input-tag for the autocomplete tip -->
-                        <input type="text" id="cardNumber" class="form-control form-control-sm btn btn-outline-light" placeholder="card number" autocomplete="off" onfocus="clearIDSearch()">                        
-                    </div>
-                    <div class="col col-3">
-                        <button type="button" id="cardNumberSubmit" class="form-control form-control-sm btn btn-outline-light" onclick="findCardByNumber()"><i class="fas fa-search" aria-hidden="true"></i></button>
-                    </div>
-                </div>
-
-                <hr style="margin:3px">
-
-                <!-- SEARCH BY CARD NAME -->
-                <div class="form-row">
-                    <div class="col col-7 offset-1">
-                        <input type="text" list="cards" name="cards" id="cardName" class="form-control form-control-sm btn btn-outline-light" placeholder="card name" onfocus="clearNameSearch()">
-                        <datalist id="cards">
-                        </datalist>
-                    </div>
-                    <div class="col col-3">
-                        <button type="button" id="cardNameSubmit" class="form-control form-control-sm btn btn-outline-light" onclick="findCardByName()"><i class="fas fa-search" aria-hidden="true"></i></button>
-                    </div>
-                </div>
-
-                <hr style="margin:10px">
-
-                <!-- SEARCH BY CARD PROPERTY - TYPE -->
-                <div class="form-row">
-                    <div class="col col-10 offset-1">
-                        <div class="input-group input-group-sm mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="cardType">Type:</label>
+                <div class="row">
+                    <div class="col-12">
+                        <form action="{{ url_for('get_items') }}">
+                             
+                            <div class="form-group form-row">
+                                <select id="filter_name" class="form-control-sm col-10 offset-1" name="filter_name">
+                                    <option value="" disabled selected>Filter by Item Name</option>
+                                    {% for dataset in floot %}
+                                        <option value="{{dataset.loot_name}}">{{dataset.loot_name}}</option>                                
+                                    {% endfor %}
+                                </select>
+                            </div>                           
+                        
+                            <div class="form-group form-row">
+                                <select id="filter_category" class="form-control-sm col-10 offset-1" name="filter_category">
+                                    <option value="" disabled selected>Filter by Item Category</option>
+                                    {% for categories in fcategory %}
+                                        <option value="{{categories.name_category}}">{{categories.name_category}}</option>                                
+                                    {% endfor %}
+                                </select>
                             </div>
-                            <select class="custom-select" id="cardType"></select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SEARCH BY CARD PROPERTY - RARITY -->
-                <div class="form-row">
-                    <div class="col col-10 offset-1">
-                        <div class="input-group input-group-sm mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="cardRarity">Rarity:</label>
+                        
+                            <div class="form-group form-row">
+                                <select id="filter_source" class="form-control-sm col-10 offset-1" name="filter_source">
+                                    <option value="" disabled selected>Filter by Item Source</option>
+                                    {% for sources in fsource %}
+                                        <option value="{{sources.source_name}}">{{sources.source_name}}</option>                                
+                                    {% endfor %}
+                                </select>
                             </div>
-                            <select class="custom-select" id="cardRarity"></select>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- SEARCH BY CARD PROPERTY - SOURCE -->                    
-                <div class="form-row">
-                    <div class="col col-10 offset-1">
-                        <div class="input-group input-group-sm mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="cardSource">Source:</label>
+                            <div class="form-row">
+                                <div class="col col-5 offset-6">
+                                    <button class="form-control form-control-sm btn btn-chib" type="submit" name="action">
+                                        <i class="fas fa-filter" aria-hidden="true"></i><span> Filter</span>
+                                    </button>
+                                </div>
                             </div>
-                            <select class="custom-select" id="cardSource"></select>
-                        </div>
+                        </form>
                     </div>
-                </div>                    
-
-                <!-- SEARCH BY CARD PROPERTY - SET -->
-                <div class="form-row">
-                    <div class="col col-10 offset-1">
-                        <div class="input-group input-group-sm mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="cardSet">Set:</label>
-                            </div>
-                            <select class="custom-select form-control form-control-sm btn btn-outline-light" id="cardSet"></select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SEARCH BY CARD PROPERTY - SEARCH BUTTON -->
-                <div class="form-row">
-                    <div class="col col-5 offset-6">
-                        <button type="button" id="setSubmit" class="form-control form-control-sm btn btn-outline-light" onclick="findCardsByStats()"><i class="fas fa-search" aria-hidden="true"></i></button>
-                    </div>
-                </div>
-                              
+                </div>                              
             </div>
 
             <!-- ITEMS RIGHT COLUMN - RESULTS SECTION -->
