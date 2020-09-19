@@ -150,6 +150,7 @@ Navigation and responsive design was tested on laptop with the latest versions o
 
 Navigation and responsive design was tested on:
 * Mobile Alacatel A1
+* Mobile Motorola G8pro
 * Amazon Fire tablet
 
 ### Hard /impossible to solve
@@ -159,7 +160,7 @@ Navigation and responsive design was tested on:
 ## Deployment
 The domain chibitales.org was purchased on godaddy.com.\
 The open project repository is available under https://github.com/RaphaelRohner/chibitales.org_milestoneproject2 \
-The project is deployed under https://raphaelrohner.github.io/chibitales.org_milestoneproject2/ \
+The project is deployed under https://chibitales.herokuapp.com/ \
 
 ## Credits
 
