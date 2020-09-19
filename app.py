@@ -14,6 +14,7 @@ app.config["MONGO_URI"] = os.getenv('MONGO_URI', 'mongodb://localhost')
 
 mongo = PyMongo(app)
 
+
 # GENERAL ROUTE TO OPEN WEBSITE AND ROUTE TO OPEN GAME.HTML
 @app.route('/')
 @app.route('/get_game')
