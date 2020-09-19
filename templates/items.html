@@ -42,20 +42,20 @@
                 <!-- FILTER ITEMS -->
                 <div class="row">
                     <div class="col-12">
-                        <form action="{{ url_for('get_items') }}">
+                        <form action="{{ url_for('filter_items', filter_name=loot_name) }}">
                              
                             <div class="form-group form-row">
                                 <select id="filter_name" class="form-control-sm col-10 offset-1" name="filter_name">
-                                    <option value="" disabled selected>Filter by Item Name</option>
+                                    <option value="" selected>Filter by Item Name</option>
                                     {% for dataset in floot %}
                                         <option value="{{dataset.loot_name}}">{{dataset.loot_name}}</option>                                
                                     {% endfor %}
                                 </select>
                             </div>                           
                         
-                            <div class="form-group form-row">
+                            <!--div class="form-group form-row">
                                 <select id="filter_category" class="form-control-sm col-10 offset-1" name="filter_category">
-                                    <option value="" disabled selected>Filter by Item Category</option>
+                                    <option value="" selected>Filter by Item Category</option>
                                     {% for categories in fcategory %}
                                         <option value="{{categories.name_category}}">{{categories.name_category}}</option>                                
                                     {% endfor %}
@@ -64,12 +64,12 @@
                         
                             <div class="form-group form-row">
                                 <select id="filter_source" class="form-control-sm col-10 offset-1" name="filter_source">
-                                    <option value="" disabled selected>Filter by Item Source</option>
+                                    <option value="" selected>Filter by Item Source</option>
                                     {% for sources in fsource %}
                                         <option value="{{sources.source_name}}">{{sources.source_name}}</option>                                
                                     {% endfor %}
                                 </select>
-                            </div>
+                            </div-->
 
                             <div class="form-row">
                                 <div class="col col-5 offset-6">

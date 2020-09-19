@@ -54,6 +54,16 @@ def get_items():
                             fsource=mongo.db.sources.find().sort("source_name", 1))
 
 
+# FILTER ITEMS.HTML - OVERVIEW PAGE
+@app.route('/filter_items/<filter_name>')
+def filter_items(filter_name):
+    the_items = mongo.db.items.find({"item_name": ObjectId(filter_name)})
+    return render_template("items.html", items=mongo.db.items.find().sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
+                            floot=mongo.db.loot.find().sort("loot_name", 1),
+                            fcategory=mongo.db.category.find().sort("name_category", 1),
+                            fsource=mongo.db.sources.find().sort("source_name", 1))
+
+
 # OPEN ITEMS_ADD.HTML PAGE
 @app.route('/add_items')
 def add_items():
