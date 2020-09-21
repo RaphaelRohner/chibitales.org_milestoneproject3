@@ -41,10 +41,10 @@
                                     
                 <!-- FILTER ITEMS -->
                 <div class="row">
-                    <div class="col-12">
+                    <div class="col">
                         <form action="{{ url_for('filter_items', filter_name=loot_name) }}">
                              
-                            <div class="form-group form-row">
+                            <div class="form-row">
                                 <select id="filter_name" class="form-control-sm col-10 offset-1" name="filter_name">
                                     <option value="" selected>Filter by Item Name</option>
                                     {% for dataset in floot %}
@@ -73,7 +73,7 @@
 
                             <div class="form-row">
                                 <div class="col col-5 offset-6">
-                                    <button class="form-control form-control-sm btn btn-chib" type="submit" name="action">
+                                    <button class="form-control form-control-sm btn btn-outline-light" type="submit" name="action">
                                         <i class="fas fa-filter" aria-hidden="true"></i><span> Filter</span>
                                     </button>
                                 </div>
@@ -90,7 +90,7 @@
                         <h3 id="chibiItemStatus" class="section-heading-right uppercase">From Dust Till Spawn!</h3>
                     </div>
                     <div class="section-heading-right">
-                        <a class="btn btn-chib" href="{{url_for('add_items')}}" id="navbarDropdownFind" role="button"><i class="fas fa-plus-square" aria-hidden="true"></i><span> Add</span></a>
+                        <a class="btn btn-chib" href="{{url_for('add_items')}}" role="button"><i class="fas fa-plus-square" aria-hidden="true"></i><span> Add</span></a>
                     </div>
                 </div>
 
@@ -112,9 +112,19 @@
 
                         <div id="col{{dataset._id}}" class="collapse" aria-labelledby="heading{{dataset._id}}" data-parent="#itemAccordion">
                             <div class="card-body">
-                                <p>Category: {{dataset.item_category}}</p>
-                                <p>Dropchance: {{dataset.item_chance}}</p>
-                                <p>Availability: {{dataset.item_time}}</p>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <p><strong>Name:</strong> {{dataset.item_name}}</p>                                        
+                                        <p><strong>Category:</strong> {{dataset.item_category}}</p>
+                                        <p><strong>Units:</strong> {{dataset.item_unit}}</p>
+                                        <p><strong>Availability:</strong> {{dataset.item_time}}</p>
+                                    </div>
+                                    <div class="col-6">
+                                        <p><strong>Source:</strong> {{dataset.item_source}}</p>
+                                        <p><strong>Dropchance:</strong> {{dataset.item_chance}}</p>
+                                        <p><strong>Price:</strong> {{dataset.item_price}}</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>                   
