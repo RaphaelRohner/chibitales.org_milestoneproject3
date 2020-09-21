@@ -407,6 +407,10 @@ footer{
     .social-icons {
         font-size: 1.8vw;
     }
+
+    .db-results{
+        width: 80%;
+    }
 }
 
 /*----------MEDIUM----------*/
