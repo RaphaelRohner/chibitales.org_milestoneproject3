@@ -59,13 +59,23 @@ def get_items():
 @app.route('/filter_items', methods=['POST', 'GET'])
 def filter_items():
     result_name = request.form.get('filter_name')
-    if result_name == "":
+    result_source = request.form.get('filter_source')
+    result_category = request.form.get('filter_category')
+    if result_name == "" and result_source == "" and result_category == "":
        return render_template("items.html", items=mongo.db.items.find().sort([("item_name", -1), ("item_source", 1), ("item_unit", 1)]),
-                            floot=mongo.db.loot.find().sort("loot_name", 1),
-                            fcategory=mongo.db.category.find().sort("name_category", 1),
-                            fsource=mongo.db.sources.find().sort("source_name", 1))
-    else:        
+                                floot=mongo.db.loot.find().sort("loot_name", 1),
+                                fcategory=mongo.db.category.find().sort("name_category", 1),
+                                fsource=mongo.db.sources.find().sort("source_name", 1))
+
+    elif result_source == "" and result_category == "":
         filter = {'item_name': result_name}
+        return render_template("items.html", items=mongo.db.items.find(filter).sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
+                                floot=mongo.db.loot.find().sort("loot_name", 1),
+                                fcategory=mongo.db.category.find().sort("name_category", 1),
+                                fsource=mongo.db.sources.find().sort("source_name", 1))
+
+    elif result_name == "" and result_category == "":
+        filter = {'item_source': result_source}
         return render_template("items.html", items=mongo.db.items.find(filter).sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
                                 floot=mongo.db.loot.find().sort("loot_name", 1),
                                 fcategory=mongo.db.category.find().sort("name_category", 1),

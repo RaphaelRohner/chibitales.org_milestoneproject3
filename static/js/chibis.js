@@ -94,9 +94,7 @@ function findCardByNumber(event) {
     /* ----------- LOADER MESSAGE DURING DELAY -----------> */
     } else {
         $("#chibiCardStatus").html(`<img src="../static/css/loader.gif" alt="loading..." /> Searching !!`);
-    }
-
-        // Catch API unavailable --> https://www.denisbouquet.com/stop-ajax-request/                       
+    }                      
     
     /* ----------- LOAD CHIBI API -----------> */
     $.when (        
