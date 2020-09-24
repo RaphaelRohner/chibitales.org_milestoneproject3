@@ -60,6 +60,8 @@ def get_items():
 def filter_items():
     result_name = request.form.get('filter_name')
     result_source = request.form.get('filter_source')
+
+    # NO FILTERS SELECTED RETURNS ALL ITEMS
     result_category = request.form.get('filter_category')
     if result_name == "" and result_source == "" and result_category == "":
        return render_template("items.html", items=mongo.db.items.find().sort([("item_name", -1), ("item_source", 1), ("item_unit", 1)]),
@@ -67,6 +69,7 @@ def filter_items():
                                 fcategory=mongo.db.category.find().sort("name_category", 1),
                                 fsource=mongo.db.sources.find().sort("source_name", 1))
 
+    # ONLY NAME SELECTED RETURNS ALL ITEMS OF THE SELECTED NAME
     elif result_source == "" and result_category == "":
         filter = {'item_name': result_name}
         return render_template("items.html", items=mongo.db.items.find(filter).sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
@@ -74,6 +77,7 @@ def filter_items():
                                 fcategory=mongo.db.category.find().sort("name_category", 1),
                                 fsource=mongo.db.sources.find().sort("source_name", 1))
 
+    # ONLY SOURCE SELECTED RETURNS ALL ITEMS OF THE SELECTED SOURCE
     elif result_name == "" and result_category == "":
         filter = {'item_source': result_source}
         return render_template("items.html", items=mongo.db.items.find(filter).sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
@@ -81,6 +85,7 @@ def filter_items():
                                 fcategory=mongo.db.category.find().sort("name_category", 1),
                                 fsource=mongo.db.sources.find().sort("source_name", 1))
 
+    # ONLY CATEGORY SELECTED RETURNS ALL ITEMS OF THE SELECTED CATEGORY
     elif result_name == "" and result_source == "":
         filter = {'item_category': result_category}
         return render_template("items.html", items=mongo.db.items.find(filter).sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
@@ -88,7 +93,7 @@ def filter_items():
                                 fcategory=mongo.db.category.find().sort("name_category", 1),
                                 fsource=mongo.db.sources.find().sort("source_name", 1))
 
-
+    # SOURCE AND CATEGORY SELECTED RETURNS ALL ITEMS OF THE SELECTED SOURCE AND CATEGORY
     elif result_name == "":
         filter = {'item_category': result_category, 'item_source': result_source}
         return render_template("items.html", items=mongo.db.items.find(filter).sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
@@ -96,7 +101,7 @@ def filter_items():
                                 fcategory=mongo.db.category.find().sort("name_category", 1),
                                 fsource=mongo.db.sources.find().sort("source_name", 1))
 
-
+    # NAME AND CATEGORY SELECTED RETURNS ALL ITEMS OF THE SELECTED NAME AND CATEGORY
     elif result_source == "":
         filter = {'item_category': result_category, 'item_name': result_name}
         return render_template("items.html", items=mongo.db.items.find(filter).sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
@@ -104,9 +109,17 @@ def filter_items():
                                 fcategory=mongo.db.category.find().sort("name_category", 1),
                                 fsource=mongo.db.sources.find().sort("source_name", 1))
 
-
+    # SOURCE AND NAME SELECTED RETURNS ALL ITEMS OF THE SELECTED SOURCE AND NAME
     elif result_category == "":
         filter = {'item_source': result_source, 'item_name': result_name}
+        return render_template("items.html", items=mongo.db.items.find(filter).sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
+                                floot=mongo.db.loot.find().sort("loot_name", 1),
+                                fcategory=mongo.db.category.find().sort("name_category", 1),
+                                fsource=mongo.db.sources.find().sort("source_name", 1))
+
+    # SOURCE AND CATEGORY SELECTED RETURNS ALL ITEMS OF THE SELECTED SOURCE AND CATEGORY
+    else:
+        filter = {'item_source': result_source, 'item_name': result_name,  'item_category': result_category}
         return render_template("items.html", items=mongo.db.items.find(filter).sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
                                 floot=mongo.db.loot.find().sort("loot_name", 1),
                                 fcategory=mongo.db.category.find().sort("name_category", 1),
