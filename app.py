@@ -81,6 +81,13 @@ def filter_items():
                                 fcategory=mongo.db.category.find().sort("name_category", 1),
                                 fsource=mongo.db.sources.find().sort("source_name", 1))
 
+    elif result_name == "" and result_source == "":
+        filter = {'item_category': result_category}
+        return render_template("items.html", items=mongo.db.items.find(filter).sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
+                                floot=mongo.db.loot.find().sort("loot_name", 1),
+                                fcategory=mongo.db.category.find().sort("name_category", 1),
+                                fsource=mongo.db.sources.find().sort("source_name", 1))
+
 
 # OPEN ITEMS_ADD.HTML PAGE
 @app.route('/add_items')
