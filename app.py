@@ -49,10 +49,11 @@ def get_trade():
 # OPEN ITEMS.HTML - OVERVIEW PAGE
 @app.route('/get_items')
 def get_items():
-    return render_template("items.html", items=mongo.db.items.find().sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
-                            floot=mongo.db.loot.find().sort("loot_name", 1),
-                            fcategory=mongo.db.category.find().sort("name_category", 1),
-                            fsource=mongo.db.sources.find().sort("source_name", 1))
+    return render_template("items.html", items=mongo.db.items.find()
+        .sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
+        floot=mongo.db.loot.find().sort("loot_name", 1),
+        fcategory=mongo.db.category.find().sort("name_category", 1),
+        fsource=mongo.db.sources.find().sort("source_name", 1))
 
 
 # FILTER ITEMS.HTML - OVERVIEW PAGE
@@ -61,78 +62,93 @@ def filter_items():
     result_name = request.form.get('filter_name')
     result_source = request.form.get('filter_source')
 
-    # NO FILTERS SELECTED RETURNS ALL ITEMS
+    # NO FILTERS SELECTED
+    # RETURNS ALL ITEMS
     result_category = request.form.get('filter_category')
     if result_name == "" and result_source == "" and result_category == "":
-       return render_template("items.html", items=mongo.db.items.find().sort([("item_name", -1), ("item_source", 1), ("item_unit", 1)]),
-                                floot=mongo.db.loot.find().sort("loot_name", 1),
-                                fcategory=mongo.db.category.find().sort("name_category", 1),
-                                fsource=mongo.db.sources.find().sort("source_name", 1))
+        return render_template("items.html", items=mongo.db.items.find()
+            .sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
+            floot=mongo.db.loot.find().sort("loot_name", 1),
+            fcategory=mongo.db.category.find().sort("name_category", 1),
+            fsource=mongo.db.sources.find().sort("source_name", 1))
 
-    # ONLY NAME SELECTED RETURNS ALL ITEMS OF THE SELECTED NAME
+    # ONLY NAME SELECTED
+    # RETURNS ALL ITEMS OF THE SELECTED NAME
     elif result_source == "" and result_category == "":
         filter = {'item_name': result_name}
-        return render_template("items.html", items=mongo.db.items.find(filter).sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
-                                floot=mongo.db.loot.find().sort("loot_name", 1),
-                                fcategory=mongo.db.category.find().sort("name_category", 1),
-                                fsource=mongo.db.sources.find().sort("source_name", 1))
+        return render_template("items.html", items=mongo.db.items.find(filter)
+            .sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
+            floot=mongo.db.loot.find().sort("loot_name", 1),
+            fcategory=mongo.db.category.find().sort("name_category", 1),
+            fsource=mongo.db.sources.find().sort("source_name", 1))
 
     # ONLY SOURCE SELECTED RETURNS ALL ITEMS OF THE SELECTED SOURCE
     elif result_name == "" and result_category == "":
         filter = {'item_source': result_source}
-        return render_template("items.html", items=mongo.db.items.find(filter).sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
-                                floot=mongo.db.loot.find().sort("loot_name", 1),
-                                fcategory=mongo.db.category.find().sort("name_category", 1),
-                                fsource=mongo.db.sources.find().sort("source_name", 1))
+        return render_template("items.html", items=mongo.db.items.find(filter)
+            .sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
+            floot=mongo.db.loot.find().sort("loot_name", 1),
+            fcategory=mongo.db.category.find().sort("name_category", 1),
+            fsource=mongo.db.sources.find().sort("source_name", 1))
 
-    # ONLY CATEGORY SELECTED RETURNS ALL ITEMS OF THE SELECTED CATEGORY
+    # ONLY CATEGORY SELECTED
+    # RETURNS ALL ITEMS OF THE SELECTED CATEGORY
     elif result_name == "" and result_source == "":
         filter = {'item_category': result_category}
-        return render_template("items.html", items=mongo.db.items.find(filter).sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
-                                floot=mongo.db.loot.find().sort("loot_name", 1),
-                                fcategory=mongo.db.category.find().sort("name_category", 1),
-                                fsource=mongo.db.sources.find().sort("source_name", 1))
+        return render_template("items.html", items=mongo.db.items.find(filter)
+            .sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
+            floot=mongo.db.loot.find().sort("loot_name", 1),
+            fcategory=mongo.db.category.find().sort("name_category", 1),
+            fsource=mongo.db.sources.find().sort("source_name", 1))
 
-    # SOURCE AND CATEGORY SELECTED RETURNS ALL ITEMS OF THE SELECTED SOURCE AND CATEGORY
+    # SOURCE AND CATEGORY SELECTED
+    # RETURNS ALL ITEMS OF THE SELECTED SOURCE AND CATEGORY
     elif result_name == "":
         filter = {'item_category': result_category, 'item_source': result_source}
-        return render_template("items.html", items=mongo.db.items.find(filter).sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
-                                floot=mongo.db.loot.find().sort("loot_name", 1),
-                                fcategory=mongo.db.category.find().sort("name_category", 1),
-                                fsource=mongo.db.sources.find().sort("source_name", 1))
+        return render_template("items.html", items=mongo.db.items.find(filter)
+            .sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
+            floot=mongo.db.loot.find().sort("loot_name", 1),
+            fcategory=mongo.db.category.find().sort("name_category", 1),
+            fsource=mongo.db.sources.find().sort("source_name", 1))
 
-    # NAME AND CATEGORY SELECTED RETURNS ALL ITEMS OF THE SELECTED NAME AND CATEGORY
+    # NAME AND CATEGORY SELECTED
+    # RETURNS ALL ITEMS OF THE SELECTED NAME AND CATEGORY
     elif result_source == "":
         filter = {'item_category': result_category, 'item_name': result_name}
-        return render_template("items.html", items=mongo.db.items.find(filter).sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
-                                floot=mongo.db.loot.find().sort("loot_name", 1),
-                                fcategory=mongo.db.category.find().sort("name_category", 1),
-                                fsource=mongo.db.sources.find().sort("source_name", 1))
+        return render_template("items.html", items=mongo.db.items.find(filter)
+            .sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
+            floot=mongo.db.loot.find().sort("loot_name", 1),
+            fcategory=mongo.db.category.find().sort("name_category", 1),
+            fsource=mongo.db.sources.find().sort("source_name", 1))
 
-    # SOURCE AND NAME SELECTED RETURNS ALL ITEMS OF THE SELECTED SOURCE AND NAME
+    # SOURCE AND NAME SELECTED
+    # RETURNS ALL ITEMS OF THE SELECTED SOURCE AND NAME
     elif result_category == "":
         filter = {'item_source': result_source, 'item_name': result_name}
-        return render_template("items.html", items=mongo.db.items.find(filter).sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
-                                floot=mongo.db.loot.find().sort("loot_name", 1),
-                                fcategory=mongo.db.category.find().sort("name_category", 1),
-                                fsource=mongo.db.sources.find().sort("source_name", 1))
+        return render_template("items.html", items=mongo.db.items.find(filter)
+            .sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
+            floot=mongo.db.loot.find().sort("loot_name", 1),
+            fcategory=mongo.db.category.find().sort("name_category", 1),
+            fsource=mongo.db.sources.find().sort("source_name", 1))
 
-    # SOURCE AND CATEGORY SELECTED RETURNS ALL ITEMS OF THE SELECTED SOURCE AND CATEGORY
+    # SOURCE AND CATEGORY SELECTED
+    # RETURNS ALL ITEMS OF THE SELECTED SOURCE AND CATEGORY
     else:
         filter = {'item_source': result_source, 'item_name': result_name,  'item_category': result_category}
-        return render_template("items.html", items=mongo.db.items.find(filter).sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
-                                floot=mongo.db.loot.find().sort("loot_name", 1),
-                                fcategory=mongo.db.category.find().sort("name_category", 1),
-                                fsource=mongo.db.sources.find().sort("source_name", 1))
+        return render_template("items.html", items=mongo.db.items.find(filter)
+            .sort([("item_name", 1), ("item_source", 1), ("item_unit", 1)]),
+            floot=mongo.db.loot.find().sort("loot_name", 1),
+            fcategory=mongo.db.category.find().sort("name_category", 1),
+            fsource=mongo.db.sources.find().sort("source_name", 1))
 
 
 # OPEN ITEMS_ADD.HTML PAGE
 @app.route('/add_items')
 def add_items():
     return render_template('items_add.html',
-                           loot=mongo.db.loot.find().sort("loot_name", 1),
-                           category=mongo.db.category.find().sort("name_category", 1),
-                           source=mongo.db.sources.find().sort("source_name", 1))
+        loot=mongo.db.loot.find().sort("loot_name", 1),
+        category=mongo.db.category.find().sort("name_category", 1),
+        source=mongo.db.sources.find().sort("source_name", 1))
 
 
 # INSERT NEW ITEM TO MONGODB AND RETURN TO ITEMS OVERVIEW
@@ -150,11 +166,11 @@ def edit_item(item_id):
     all_names = mongo.db.loot.find().sort("loot_name", 1)
     all_sources = mongo.db.sources.find().sort("source_name", 1)
     all_categories = mongo.db.category.find().sort("name_category", 1)
-    return render_template('items_edit.html', 
-                            item=the_item,
-                            names=all_names,
-                            sources=all_sources,
-                            categories=all_categories,)
+    return render_template('items_edit.html',
+        item=the_item,
+        names=all_names,
+        sources=all_sources,
+        categories=all_categories,)
 
 
 # UPDATE MONGODB COLLECTION ITEMS WITH NEW VALUES AFTER EDIT
@@ -228,7 +244,8 @@ def delete_loot(loot_id):
 # OPEN SOURCE.HTML - OVERVIEW PAGE
 @app.route('/get_source')
 def get_source():
-    return render_template("source.html", source=mongo.db.sources.find().sort("source_name", 1))
+    return render_template("source.html", source=mongo.db.sources.find()
+        .sort("source_name", 1))
 
 
 # OPEN SOURCE_ADD.HTML PAGE
@@ -249,8 +266,8 @@ def insert_source():
 @app.route('/edit_source/<source_id>')
 def edit_source(source_id):
     return render_template('source_edit.html',
-                           source=mongo.db.sources.find_one(
-                           {'_id': ObjectId(source_id)}))
+        source=mongo.db.sources.find_one(
+        {'_id': ObjectId(source_id)}))
 
 
 # UPDATE MONGODB DATASET SOURCE_NAME WITH NEW VALUE AFTER EDIT
@@ -272,7 +289,8 @@ def delete_source(source_id):
 # OPEN CATEGORY.HTML - OVERVIEW PAGE
 @app.route('/get_category')
 def get_category():
-    return render_template("category.html", category=mongo.db.category.find().sort("name_category", 1))
+    return render_template("category.html", category=mongo.db.category.find()
+        .sort("name_category", 1))
 
 
 # OPEN CATEGORY_ADD.HTML PAGE
@@ -293,8 +311,8 @@ def insert_category():
 @app.route('/edit_category/<category_id>')
 def edit_category(category_id):
     return render_template('category_edit.html',
-                           category=mongo.db.category.find_one(
-                           {'_id': ObjectId(category_id)}))
+        category=mongo.db.category.find_one(
+        {'_id': ObjectId(category_id)}))
 
 
 # UPDATE MONGODB DATASET name_category WITH NEW VALUE AFTER EDIT
