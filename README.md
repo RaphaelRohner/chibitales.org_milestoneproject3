@@ -1,11 +1,26 @@
 # chibitales.org - Milestone Project 3 - Data Centric Development
-The third incarnation of chibitales.org, a website for players of Chibi Fighters 2.0, allows players to use, fill and change content - using CRUD operations on the connected MongoDB database:
+The third incarnation of chibitales.org, a website for players of Chibi Fighters 2.0, allows players to read, add and change content, using CRUD operations on the connected MongoDB database:
 * Viewing and filtering existing content
 * Adding new content
 * Editing existing content
 * Deleting existing content
 
-The Milestone Project contributes the new navigation element "Items" to the website and removed redundant html from the website by using Flask.
+The third Milestone Project contributes a new navigation element "Items" to the website and removes redundant html from the website by using Flask. Some changes were made to the navigation and its CSS styling as well to match different screen sizes better as well.
+
+## Table of contents
+
+* UX
+* Features
+* Future Features
+* Database Structure
+* Database Integration
+* Technologies used
+* Testing
+* Defensive design
+* Hard or impossibleto solve
+* Deployment
+* Deployment Steps
+* Credits
 
 ## UX
 
@@ -143,7 +158,7 @@ All Python3 and Flask code was tested manually.\
 * Update operations were executed on four devices and several browsers.
 * Delete operations were executed on four devices and several browsers.
 
-Navigation and responsive design was tested on laptop with the latest versions of:
+Navigation and responsive design was tested with the latest versions of:
 * Google Chrome
 * Firefox
 * MS Edge
@@ -155,16 +170,38 @@ Navigation and responsive design was tested on:
 * Mobile Motorola G8pro
 * Amazon Fire tablet
 * MSI GP63 Leopard 8RE
-* MacBook Air
+* MacBook Air and 24inch screen
 
-### Hard /impossible to solve
-* A datamodel to display such a wide variety of content. 
+## Defensive design
+* With every step taken the website's inner structure was tested extensivly against user breaking it by using it.
+* There is no way to break out of the paths layed out on the site with built-in functionality.
+* The only weaknesses are:
+  * Users can just delete content. Asking for confirmation to delete seemed useless under this requirement.
+  * Users can create duplicates. I did not have the time to fully anticipate the necessitys of a feature preventing this.
+
+## Hard or impossible to solve
+* A datamodel to display such a wide variety of content.
 * Breaking down the complexity of the game's infrastructure into a simple data model.
+* The solution is to keep it flexible and not trying to structure it to much. Every thing is made up from a few relevant characteristics which I caught, I think.
+* GitPod is throwing warnings because of the @app.routes. They are fully working but I did not find a way to make them disappear. They are confusing and might make some actual mistake slip through.
 
 ## Deployment
-The domain chibitales.org was purchased on godaddy.com.\
+The domain chibitales.org was purchased on godaddy.com. The domain was forwarded to the Heroku App under GoDaddy's DNS settings before submission. \
 The open project repository is available under https://github.com/RaphaelRohner/chibitales.org_milestoneproject3 \
 The project is deployed under https://chibitales.herokuapp.com/ \
+
+## Deployment steps
+* A GitHub project was created from the CodeInstitute full template.
+* The project was created in GitPod to programme it.
+* A MongoDB database with four collections for the data needed in the project was created.
+* A Heroku app named chibitales was created to deploy the project.
+* The connection from GitPod to MongoDB was established using environment variables.
+* Each major step programmed in GitPod was pushed to the projects GitHub repository using git status, git add ., git commit -m"message" and git push.
+* Five days before submission Heroku was installed to the GitPod repository and the commits went to Heroku, so the live site could be tested.
+* The Heroku settings were changed to automatically sync with GitHub under Deploy > Deployment method.
+* Further commits were pushed to GitHub using the command git push origin master from GitPod. Thanks Steven from the tutoring support!!
+* The domain chibitales.org was forwaded to chibitales.herokuapp.com and tested.
+* The app is live
 
 ## Credits
 
